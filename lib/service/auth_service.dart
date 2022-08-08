@@ -12,6 +12,8 @@ class AuthClass {
     ],
   );
   FirebaseAuth auth = FirebaseAuth.instance;
+
+  AuthCredential get credential => credential;
   Future<void> googleSignIn(BuildContext context) async {
     try {
       GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
@@ -23,15 +25,44 @@ class AuthClass {
           accessToken: googleSignInAuthentication.accessToken,
         );
         try {
-          UserCredential userCredential = await auth.signInWithCredential(credential);
+          UserCredential userCredential =
+              await auth.signInWithCredential(credential);
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                  builder: (builder) => SignIn()),
-                  (route) => false);
-
+              MaterialPageRoute(builder: (builder) => SignIn()),
+              (route) => false);
         } catch (e) {}
       } else {}
+    } catch (e) {}
+  }
+
+  Future<void> VerifyPhoneNumber(
+      String phoneNumber, BuildContext context, Function setData) async {
+    PhoneVerificationCompleted VerificationCompleted =
+        (PhoneAuthCredential phoneAuthCredential) async {};
+    PhoneVerificationFailed VerificationFailed =
+        (FirebaseAuthException) async {};
+    PhoneCodeSent CodeSent =
+        (String verificationId, [int? forceResendingtoken]) {};
+    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+        (String verificationId) {};
+    try {
+      await auth.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: VerificationCompleted,
+          verificationFailed: VerificationFailed,
+          codeSent: CodeSent,
+          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+    } catch (e) {}
+  }
+
+  Future<void> signInwithPhoneNumber(
+      String verificationId, String smsCode) async {
+    try {
+      AuthCredential authCredential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: smsCode);
+      UserCredential userCredential =
+      await auth.signInWithCredential(credential);
     } catch (e) {}
   }
 }

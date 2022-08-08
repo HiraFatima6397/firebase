@@ -4,6 +4,7 @@ import 'package:firebase_auth1/constant/icon.dart';
 import 'package:firebase_auth1/constant/image.dart';
 import 'package:firebase_auth1/constant/string_constant.dart';
 import 'package:firebase_auth1/constant/style.dart';
+import 'package:firebase_auth1/phone_auth/phone_auth.dart';
 import 'package:firebase_auth1/service/auth_service.dart';
 import 'package:firebase_auth1/sign_in/sign_in.dart';
 import 'package:flutter/material.dart';
@@ -127,6 +128,25 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: 20,
                       ),
+                      InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder:(bilder)=> PhoneAuth()));},
+                        child: Container(
+                          height: 40,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: AppColors.black, width: 1),
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(AppImages.phone,height: 30,width: 30),
+                              SizedBox(width: 10,),
+                              Text(StringConstant.continueWithPhone,style: AppStyles.regularText(fontSize: 15,color: AppColors.black),)
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+
                       InkWell(
                         onTap: () async {
                           setState(() {
