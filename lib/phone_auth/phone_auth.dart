@@ -19,7 +19,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
   int Start = 30;
   bool wait = false;
   String buttonName = StringConstant.send;
-  TextEditingController phonecontroller=TextEditingController();
+  TextEditingController phoneController=TextEditingController();
   AuthClass authClass=AuthClass();
   String verificationId='';
   String smsCode='';
@@ -29,19 +29,19 @@ class _PhoneAuthState extends State<PhoneAuth> {
       backgroundColor: AppColors.black,
       appBar: AppBar(
         backgroundColor: AppColors.black,
-        title: Text(StringConstant.signUp),
+        title: const Text(StringConstant.signUp),
         centerTitle: true,
       ),
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 150,
             ),
             textfield(),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -49,11 +49,11 @@ class _PhoneAuthState extends State<PhoneAuth> {
               style:
                   AppStyles.regularText(fontSize: 20, color: AppColors.white),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             otpfield(),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             RichText(
@@ -72,7 +72,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                         fontSize: 20, color: AppColors.yellow)),
               ]),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Container(
@@ -112,7 +112,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
       fieldWidth: 50,
       otpFieldStyle: OtpFieldStyle(
           backgroundColor: AppColors.grey, borderColor: AppColors.white),
-      style: TextStyle(fontSize: 17),
+      style: const TextStyle(fontSize: 17),
       textFieldAlignment: MainAxisAlignment.spaceAround,
       fieldStyle: FieldStyle.underline,
       onCompleted: (pin) {
@@ -130,13 +130,13 @@ class _PhoneAuthState extends State<PhoneAuth> {
           borderRadius: BorderRadius.circular(20),
         ),
         child: TextFormField(
-          controller: phonecontroller,
+          controller: phoneController,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: StringConstant.enterYourNumber,
             hintStyle:
                 AppStyles.regularText(fontSize: 15, color: AppColors.white),
-            contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 15),
+            contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 15),
             prefixIcon: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               child: Text(StringConstant.icon,
@@ -153,7 +153,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                         wait = true;
                         buttonName = StringConstant.resend;
                       });
-                      authClass.VerifyPhoneNumber('+91${phonecontroller.text}', context,setData);
+                      authClass.VerifyPhoneNumber('+91${phoneController.text}', context,setData);
                     },
               child: Padding(
                 padding:

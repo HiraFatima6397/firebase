@@ -1,3 +1,5 @@
+import 'package:firebase_auth1/add_todo/add_todopage.dart';
+import 'package:firebase_auth1/add_todo/schedule.dart';
 import 'package:firebase_auth1/signup_page/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   void signup() async {
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
-          email: 'hiraf3142@gmail.com', password: '123456');
+          email: 'hiraf3141@gmail.com', password: '123656');
     } catch (e) {
       print(e);
     }

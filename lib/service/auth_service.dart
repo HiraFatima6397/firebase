@@ -43,7 +43,9 @@ class AuthClass {
     PhoneVerificationFailed VerificationFailed =
         (FirebaseAuthException) async {};
     PhoneCodeSent CodeSent =
-        (String verificationId, [int? forceResendingtoken]) {};
+        (String verificationId, [int? forceResendingtoken]) {
+      setData(verificationId);
+        };
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
         (String verificationId) {};
     try {
@@ -53,7 +55,9 @@ class AuthClass {
           verificationFailed: VerificationFailed,
           codeSent: CodeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-    } catch (e) {}
+    } catch (e) {
+showSnackBar(context, e.toString());
+    }
   }
 
   Future<void> signInwithPhoneNumber(
@@ -64,5 +68,9 @@ class AuthClass {
       UserCredential userCredential =
       await auth.signInWithCredential(credential);
     } catch (e) {}
+  }
+  void showSnackBar(BuildContext context, String text){
+    final snackBar = SnackBar(content: Text(text));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

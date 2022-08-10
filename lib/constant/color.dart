@@ -9,6 +9,9 @@ class AppColors{
   static const Color black = Colors.black;
   static const Color yellow = Colors.yellow;
   static const Color pink = Colors.pink;
+  static const Color pink2 = Colors.pinkAccent;
+  static const Color blue = Colors.lightBlueAccent;
+  static const Color red = Colors.red;
 
 
 

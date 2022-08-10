@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth1/add_todo/add_todopage.dart';
 import 'package:firebase_auth1/constant/color.dart';
 import 'package:firebase_auth1/constant/icon.dart';
 import 'package:firebase_auth1/constant/image.dart';
@@ -21,7 +22,7 @@ class _SignUpState extends State<SignUp> {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _pwdcontroller = TextEditingController();
-  bool circuler = false;
+  bool circular = false;
 
   AuthClass authClass=AuthClass();
   @override
@@ -39,16 +40,16 @@ class _SignUpState extends State<SignUp> {
                   AppImages.icon,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Container(
                 height: 520,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(100),
-                      bottomRight: Radius.circular(100),
+                      bottomRight: const Radius.circular(100),
                     ),
                     color: AppColors.white,
                     boxShadow: [
@@ -70,7 +71,7 @@ class _SignUpState extends State<SignUp> {
                             fontWeight: FontWeight.bold,
                             color: AppColors.black),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       TextField(
@@ -80,12 +81,12 @@ class _SignUpState extends State<SignUp> {
                               hintStyle:
                               AppStyles.regularText(color: AppColors.black),
                               prefixIcon:
-                              Icon(AppIcons.person, color: AppColors.black),
+                              const Icon(AppIcons.person, color: AppColors.black),
                               fillColor: AppColors.grey,
                               filled: true,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20)))),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextField(
@@ -96,12 +97,12 @@ class _SignUpState extends State<SignUp> {
                               hintStyle:
                               AppStyles.regularText(color: AppColors.black),
                               prefixIcon:
-                              Icon(AppIcons.pass, color: AppColors.black),
+                              const Icon(AppIcons.pass, color: AppColors.black),
                               fillColor: AppColors.grey,
                               filled: true,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20)))),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                   InkWell(onTap: (){
@@ -117,7 +118,7 @@ class _SignUpState extends State<SignUp> {
         child: Row(
           children: [
             Image.asset(AppImages.google,height: 30,width: 30),
-            SizedBox(width: 10,),
+            const SizedBox(width: 10,),
             Text(StringConstant.continueWithGoogle,style: AppStyles.regularText(fontSize: 15,color: AppColors.black),)
           ],
         ),
@@ -125,10 +126,10 @@ class _SignUpState extends State<SignUp> {
                   ),
 
 
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder:(bilder)=> PhoneAuth()));},
+                      InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder:(bilder)=> const PhoneAuth()));},
                         child: Container(
                           height: 40,
                           width: double.infinity,
@@ -139,71 +140,35 @@ class _SignUpState extends State<SignUp> {
                           child: Row(
                             children: [
                               Image.asset(AppImages.phone,height: 30,width: 30),
-                              SizedBox(width: 10,),
+                              const SizedBox(width: 10,),
                               Text(StringConstant.continueWithPhone,style: AppStyles.regularText(fontSize: 15,color: AppColors.black),)
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
 
-                      InkWell(
-                        onTap: () async {
-                          setState(() {
-                            circuler = true;
-                          });
-                          try {
-                            firebase_auth.UserCredential usercredential =
-                            await firebaseAuth
-                                .createUserWithEmailAndPassword(
-                                email: _emailcontroller.text,
-                                password: _pwdcontroller.text);
-                            print(usercredential.user?.email);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (builder) => SignIn()),
-                                    (route) => false);
-                            setState(() {
-                              circuler = false;
-                            });
-                          } catch (e) {
-                            // final SnackBar =
-                            //     SnackBar(content: Text(e.toString()));
-                            // ScaffoldMessenger.of(context)
-                            //     .showSnackBar(SnackBar);
-                            setState(() {
-                              circuler = false;
-                            });
-                          }
-                        },
-                        child: Container(
-                          height: 50,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color: AppColors.black,
-                          ),
-                          child: Center(
-                            child: circuler
-                                ? CircularProgressIndicator()
-                                : Text(StringConstant.signUp,
-                                style: AppStyles.regularText(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.white)),
-                          ),
-                        ),
+                   colorButton(),
+                      const SizedBox(
+                        height: 15,
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        StringConstant.login,
-                        style: AppStyles.regularText(
-                            color: AppColors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400),
+                      Row(
+                        children: [
+                          Text(
+                            StringConstant.ifYouHave,
+                            style: AppStyles.regularText(
+                                color: AppColors.black,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          InkWell(onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder:(bilder)=> const SignIn()));
+                          },
+                            child: Text(StringConstant.login,style: AppStyles.regularText(
+                                color: AppColors.black,
+                                fontSize: 15,)
+                            ),
+                          ) ],
                       )
                     ],
                   ),
@@ -211,6 +176,56 @@ class _SignUpState extends State<SignUp> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+  Widget colorButton(){
+    return   InkWell(
+      onTap: () async {
+        setState(() {
+          circular = true;
+        });
+        try {
+          firebase_auth.UserCredential usercredential =
+          await firebaseAuth
+              .createUserWithEmailAndPassword(
+              email: _emailcontroller.text,
+              password: _pwdcontroller.text);
+          print(usercredential.user!.email);
+
+          setState(() {
+            circular = false;
+          });
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (builder) => const SignIn()),
+                  (route) => false);
+        } catch (e) {
+          final snackBar = SnackBar(content: Text(e.toString()));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+          setState(() {
+            circular = false;
+          });
+        }
+      },
+      child: Container(
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          color: AppColors.black,
+        ),
+        child: Center(
+          child:circular
+              ? const CircularProgressIndicator()
+              : Text(StringConstant.signUp,
+              style: AppStyles.regularText(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.white)),
         ),
       ),
     );

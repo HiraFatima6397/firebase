@@ -17,6 +17,7 @@ class AppStyles {
       fontWeight: fontWeight ?? FontWeight.w500,
       color: color ?? AppColors.grey,
       height: height,
+      letterSpacing: 2,
       decoration: isUnderline ? TextDecoration.underline : TextDecoration.none,
     );
 
